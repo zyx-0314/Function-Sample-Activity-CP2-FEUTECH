@@ -1,6 +1,7 @@
 // create a calculator which can add, divide, subtract, multiply two values
 
 #include <iostream>
+#include <string>
 
 using namespace std;
 
@@ -14,19 +15,30 @@ double AcceptValue(int);
 int MainMenu();
 bool EndMenu();
 
+void WelcomeUser(string, int);
+
 int main()
 {
     const int MAXVALUE = 2;
 
-    int actionChoosen;
-    string selectedAction;
+    int actionChoosen, year;
+    string selectedAction, name;
     double val1, val2, result = 0;
+
+    std::cout << "State your name: ";
+    getline(cin, name);
+    std::system("cls");
+    std::wcout << "Birth year: ";
+    cin >> year;
+    std::system("cls");
+
+    WelcomeUser(name, year - 2024);
 
     do
     {
         actionChoosen = MainMenu();
 
-        system("cls");
+        std::system("cls");
 
         for (int counter = 0; counter < MAXVALUE; counter++)
         {
@@ -55,13 +67,13 @@ int main()
             selectedAction = " / ";
             break;
         default:
-            cout << "Choice is out of range";
+            std::cout << "Choice is out of range";
             break;
         }
 
-        cout << val1 << selectedAction << val2 << " = " << result << endl << endl;
-        system("pause");
-        system("cls");
+        std::cout << val1 << selectedAction << val2 << " = " << result << endl << endl;
+        std::system("pause");
+        std::system("cls");
     } while (EndMenu());
 
 }
@@ -85,7 +97,7 @@ double DivideValue(double val1, double val2)
 {
     if (val2 == 0)
     {
-        cout << "Undefined";
+        std::cout << "Undefined";
         return 0;
     }
 
@@ -96,7 +108,7 @@ double AcceptValue(int counter)
 {
     double input;
 
-    cout << "Enter Value " << counter + 1 << ":";
+    std::cout << "Enter Value " << counter + 1 << ":";
     cin >> input;
 
     return input;
@@ -106,7 +118,7 @@ int MainMenu()
 {
     int actionChoosen;
 
-    cout
+    std::cout
         << "Welcome this is Calculator that accepts 2 Value\n"
         << "1. Add\n"
         << "2. Subtract\n"
@@ -123,7 +135,7 @@ bool EndMenu()
 {
     string answer;
 
-    cout << "Want to do another math problem?";
+    std::cout << "Want to do another math problem?";
     cin >> answer;
 
     if (answer.find('y') != string::npos)
@@ -133,3 +145,9 @@ bool EndMenu()
     else
         return 0;
 }
+
+void WelcomeUser(string user, int age)
+{
+    std::cout << "Welcome " << user << ", Happy New Year. Your " << abs(age) << " yrs old now, your old.\n\n";
+}
+
